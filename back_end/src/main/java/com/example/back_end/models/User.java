@@ -12,16 +12,16 @@ import jakarta.persistence.Table;
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @Column
     private String name;
 
-    @Column
+    @Column(nullable=false, unique=true)
     private String email;
 
-    @Column
+    @Column(nullable=false)
     private String password;
 
     public long getId() {
