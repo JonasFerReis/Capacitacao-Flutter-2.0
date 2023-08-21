@@ -1,6 +1,9 @@
 package com.example.back_end.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,10 +25,14 @@ public class UserController {
     }
 
     @PostMapping
-    public void cadastrarUsuario(@RequestBody User user){
+    public ResponseEntity<User> cadastrarUsuario(@RequestBody User user){
         System.out.println(user.getName());
-        if (user.getName() != null){
-            userRepository.save(user);
+        if (userRepository.findByEmail(user.getEmail()) == null){
+            User usuario = userRepository.save(user);
+            return ResponseEntity.status(HttpStatus.CREATED).body(usuario);
+        }
+        else{
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
     }
     
