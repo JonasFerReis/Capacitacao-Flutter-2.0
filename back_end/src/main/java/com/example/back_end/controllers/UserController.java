@@ -2,7 +2,6 @@ package com.example.back_end.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -13,16 +12,14 @@ import com.example.back_end.models.User;
 import com.example.back_end.repository.UserRepository;
 import java.util.Optional;
 
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-
 @RestController
 @RequestMapping("/users")
 public class UserController {
-    
+
     private final UserRepository userRepository;
 
     @Autowired
@@ -63,19 +60,23 @@ public class UserController {
 
         User usuarioEncontrado = usuario.get();
 
-        if (dadosNovos.getName() != null){
-            usuarioEncontrado.setName(dadosNovos.getName());
-        }
-        if (dadosNovos.getEmail() != null){
-            usuarioEncontrado.setEmail(dadosNovos.getEmail());
-        }
-        if (dadosNovos.getPassword() != null){
-            usuarioEncontrado.setPassword(dadosNovos.getPassword());
-        }
-        
-        userRepository.save(usuarioEncontrado);
+        User usuarioAtualizado = atualizarUser(usuarioEncontrado, dadosNovos);
+
+        userRepository.save(usuarioAtualizado);
 
         return ResponseEntity.status(HttpStatus.OK).body(usuario);
     }
-    
+
+}
+public User atualizarUser(User antigoUser, User novoUser){
+    if (novoUser.getName() != null){
+        antigoUser.setName(novoUser.getName());
+    }
+    if (novoUser.getEmail() != null){
+        antigoUser.setEmail(novoUser.getEmail());
+    }
+    if (novoUser.getPassword() != null){
+        antigoUser.setPassword(novoUser.getPassword());
+    }
+    return antigoUser;
 }
