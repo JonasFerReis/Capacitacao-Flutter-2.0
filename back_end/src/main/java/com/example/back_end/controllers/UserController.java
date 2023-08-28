@@ -53,7 +53,7 @@ public class UserController {
     // Passar nome, email ou senha ( ou todos ) no body de sua requisição
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<?> atualizarUsuario(@RequestBody User dadosNovos, @PathVariable("id") Long id){
+    public ResponseEntity<?> editarUsuario(@RequestBody User dadosNovos, @PathVariable("id") Long id){
 
         Optional<User> usuario = userRepository.findById(id);
         if (!usuario.isPresent()){
