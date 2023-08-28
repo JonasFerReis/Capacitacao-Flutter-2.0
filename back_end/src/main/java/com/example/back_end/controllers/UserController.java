@@ -1,5 +1,6 @@
 package com.example.back_end.controllers;
 
+import org.hibernate.mapping.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.back_end.models.User;
 import com.example.back_end.repository.UserRepository;
+
 import java.util.Optional;
 
 import org.springframework.web.bind.annotation.PathVariable;
@@ -37,13 +39,13 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<User> cadastrarUsuario(@RequestBody User user){
+    public ResponseEntity<?> cadastrarUsuario(@RequestBody User user){
         if (userRepository.findByEmail(user.getEmail()) == null){
             User usuario = userRepository.save(user);
             return ResponseEntity.status(HttpStatus.CREATED).body(usuario);
         }
         else{
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Já existe um usário cadastrado com esse email");
         }
     }
 
@@ -66,17 +68,17 @@ public class UserController {
 
         return ResponseEntity.status(HttpStatus.OK).body(usuario);
     }
-
-}
-public User atualizarUser(User antigoUser, User novoUser){
-    if (novoUser.getName() != null){
-        antigoUser.setName(novoUser.getName());
+    
+    public User atualizarUser(User antigoUser, User novoUser){
+        if (novoUser.getName() != null){
+            antigoUser.setName(novoUser.getName());
+        }
+        if (novoUser.getEmail() != null){
+            antigoUser.setEmail(novoUser.getEmail());
+        }
+        if (novoUser.getPassword() != null){
+            antigoUser.setPassword(novoUser.getPassword());
+        }
+        return antigoUser;
     }
-    if (novoUser.getEmail() != null){
-        antigoUser.setEmail(novoUser.getEmail());
-    }
-    if (novoUser.getPassword() != null){
-        antigoUser.setPassword(novoUser.getPassword());
-    }
-    return antigoUser;
 }
