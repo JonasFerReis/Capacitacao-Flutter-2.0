@@ -35,7 +35,7 @@ class _LoginPageState extends State<LoginPage> {
             child: Column(
               children: [
         
-                const SizedBox(height: 100),
+                const SizedBox(height: 12),
                 //ícone de usuário
                 const Icon(
                   Icons.person_outline,
@@ -148,7 +148,7 @@ class _LoginPageState extends State<LoginPage> {
                   ],
                 ),
                 
-                const SizedBox(height: 75),
+                const SizedBox(height: 30),
 
                 //ícone da emakers
                 const Row(
