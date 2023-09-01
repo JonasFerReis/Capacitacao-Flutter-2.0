@@ -130,7 +130,7 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
 
-                const SizedBox(height:50),
+                const SizedBox(height:70),
 
                 //ícones do google, facebook e apple
                 const Row(
@@ -148,17 +148,20 @@ class _LoginPageState extends State<LoginPage> {
                   ],
                 ),
                 
-                const SizedBox(height: 50),
+                const SizedBox(height: 75),
 
                 //ícone da emakers
                 const Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     LogoIcon(imagePath: 'lib/images/logo_emakers.png'),
-                    SizedBox(width: 4),
+                    SizedBox(width: 1),
                     Text(
                       'emakersjr.com.br',
-                      style: TextStyle(color: Colors.white),
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 18,
+                      ),
                     ),
                   ],
                 ),
