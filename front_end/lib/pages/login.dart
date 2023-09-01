@@ -3,18 +3,26 @@ import 'package:front_end/components/login_button.dart';
 import 'package:front_end/components/logo_icon.dart';
 import 'package:front_end/components/my_textfield.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
   //construtor personalizado
   LoginPage({super.key});
 
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
   // editando controladores de texto
   final usernameController = TextEditingController();
+
   final passwordController = TextEditingController();
 
   //método de login (integração back)
   void SignIn(){
 
   }
+
+  bool RememberMe = false;
 
   @override
   Widget build(BuildContext context){
@@ -52,16 +60,26 @@ class LoginPage extends StatelessWidget {
                 ),
         
                 const SizedBox(height: 10),
+
                 //lembrar senha
-                const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 25.0),
+                Padding(
+                  padding: const EdgeInsets.only(left: 12.0),
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      Text(
-                        'Lembrar Senha',
-                        style: TextStyle(color: Colors.white),
+                      Theme(data: ThemeData(unselectedWidgetColor: Colors.white), 
+                      child: Checkbox(
+                        onChanged: (value){
+                          setState(() {
+                            RememberMe = !RememberMe;
+                          });
+                        },
+                        value: RememberMe,
+                        ),
                       ),
+                      const Text(
+                        "Lembrar Senha",
+                        style: TextStyle(color: Colors.white),
+                        ),
                     ],
                   ),
                 ),
