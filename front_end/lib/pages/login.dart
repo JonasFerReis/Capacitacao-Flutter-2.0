@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:front_end/components/login_button.dart';
+import 'package:front_end/components/logo_icon.dart';
 import 'package:front_end/components/my_textfield.dart';
 
 class LoginPage extends StatelessWidget {
@@ -110,15 +111,39 @@ class LoginPage extends StatelessWidget {
                     ],
                   ),
                 ),
-        
+
+                const SizedBox(height:50),
+
                 //ícones do google, facebook e apple
-                Row(
+                const Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Image.asset('lib/images/google.png', height: 72,)
+                    LogoIcon(imagePath: 'lib/images/google.png'),
+
+                    SizedBox(width:25),
+
+                    LogoIcon(imagePath: 'lib/images/facebook.png'),
+
+                    SizedBox(width:25),
+
+                    LogoIcon(imagePath: 'lib/images/apple.png'),
                   ],
-                )
+                ),
+                
+                const SizedBox(height: 50),
+
                 //ícone da emakers
-        
+                const Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    LogoIcon(imagePath: 'lib/images/logo_emakers.png'),
+                    SizedBox(width: 4),
+                    Text(
+                      'emakersjr.com.br',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ],
+                ),
               ],
             ),
           ),
