@@ -60,6 +60,9 @@ public class User {
     public void setResetPasswordToken(String resetPasswordToken) {
         this.resetPasswordToken = resetPasswordToken;
     }
+    public User(String errorMessage) {
+        this.name = errorMessage;
+    }
     
 }
 
