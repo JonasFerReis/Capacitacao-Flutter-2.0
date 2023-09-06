@@ -67,7 +67,7 @@ class RegisterPage extends StatelessWidget {
                 const SizedBox(height: 15),
 
                 //Botão "Entrar"
-                const RegisterButton(),
+                 RegisterButton(userName: nameController, userEmail: emailController, userImage: 'https://w7.pngwing.com/pngs/851/512/png-transparent-looking-at-the-cat-hand-painted-pet-cat.png'),
 
                 Image.asset(
                   'lib/images/pc_com_chip_1.png',

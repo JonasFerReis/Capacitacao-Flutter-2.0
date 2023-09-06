@@ -20,7 +20,7 @@ class UserInherited extends InheritedWidget {
             'https://static.wikia.nocookie.net/clubpenguin/images/7/75/Blue_from_a_Player_Card.PNG/revision/latest/scale-to-width-down/1200?cb=20140825075945'),
   ];
 
-  void newUser(String userName, String userEmail, String, userImage){
+  void newUser(String userName, String userEmail, userImage){
     usList.add(UserCard(userName: userName, userEmail: userEmail, userImage: userImage));
   }
 

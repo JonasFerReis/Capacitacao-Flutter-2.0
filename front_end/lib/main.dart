@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:front_end/data/user_inherited.dart';
 import 'package:front_end/pages/initial_screen.dart';
-import 'package:front_end/pages/user_list.dart';
 
 void main(){
   runApp(const MyApp());
@@ -11,9 +11,9 @@ class MyApp extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return  MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: InitialScreen(),
+      home: UserInherited(child: const InitialScreen()),
     );
   }
 }

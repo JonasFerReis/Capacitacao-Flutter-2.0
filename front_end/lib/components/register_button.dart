@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:front_end/pages/user_list.dart';
 
 class RegisterButton extends StatelessWidget {
-  const RegisterButton({super.key});
+  final userName, userEmail, userImage;
+  const RegisterButton({super.key, required this.userName, required this.userEmail, required this.userImage});
 
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
       onPressed: () {
+        //UserInherited.of(context).newUser(userName.text, userEmail.text, userImage.text);
         ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Usuario cadastrado com sucesso"),),);
+        Navigator.push(context, MaterialPageRoute(builder: (context) => const UsersList()));
       },
       style: ButtonStyle(
         backgroundColor: MaterialStateProperty.resolveWith<Color>(
