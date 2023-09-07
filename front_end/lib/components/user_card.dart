@@ -95,7 +95,7 @@ class UserCard extends StatelessWidget {
                 ),
 
                 //Seta puxando as opcoes
-                Icon(Icons.arrow_back,
+                const Icon(Icons.arrow_back,
                     size: 40, color: Color.fromARGB(255, 242, 124, 58)),
               ],
             ),

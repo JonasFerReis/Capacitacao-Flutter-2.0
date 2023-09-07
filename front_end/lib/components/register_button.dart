@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:front_end/pages/user_list.dart';
 
+import '../data/user_inherited.dart';
+
 class RegisterButton extends StatelessWidget {
   final userName, userEmail, userImage;
   const RegisterButton({super.key, required this.userName, required this.userEmail, required this.userImage});
@@ -9,7 +11,7 @@ class RegisterButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       onPressed: () {
-        //UserInherited.of(context).newUser(userName.text, userEmail.text, userImage.text);
+
         ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Usuario cadastrado com sucesso"),),);
         Navigator.push(context, MaterialPageRoute(builder: (context) => const UsersList()));
       },
