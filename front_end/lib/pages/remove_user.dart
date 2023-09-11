@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:front_end/components/comeback_button.dart';
 
 class RemoveUser extends StatelessWidget {
   const RemoveUser({super.key});
+
+    //método de voltar (integração back)
+  void ComeBack(){
+
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -20,25 +26,27 @@ class RemoveUser extends StatelessWidget {
                         color: Colors.white,
                       ),
 
+                      // Texto principal
                       const SizedBox(height: 40),
                       const Text(
                         'USUÁRIO EXCLUÍDO COM SUCESSO',
+                        textAlign: TextAlign.center,
                         style: TextStyle(
-                          color: Colors.green, 
+                          color: Color.fromARGB(255, 104, 246, 109), 
                           fontSize: 40, 
-                          
+                          fontFamily: 'FjallaOne',
                           ),
                       ),
 
-                      Container(
-                        width: 200.0, // Largura do container
-                        height: 200.0, // Altura do container
-                        decoration: const BoxDecoration(
-                          image: DecorationImage(
-                            image: AssetImage('images/computer_check.png'), // Caminho da imagem
-                            fit: BoxFit.cover, // Ajuste da imagem
-                          ),
-                        ),
+                      // Botão de voltar
+                      const SizedBox(height: 40),
+                      ComeBackButton(onTap: ComeBack),
+
+                      // Imagem do computador
+                      const SizedBox(height: 30),
+                      Image.asset(
+                        'lib/images/computer_check.png',
+                        height: 300,
                       ),
                     ],
                   )
