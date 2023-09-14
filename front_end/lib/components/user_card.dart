@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:front_end/pages/remove_user.dart';
 
 class UserCard extends StatelessWidget {
   final String userName;
@@ -32,7 +33,7 @@ class UserCard extends StatelessWidget {
               ),
               SlidableAction(
                 onPressed: ((context) {
-                  //excluir
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => const RemoveUser()));
                 }),
                 icon: Icons.delete,
                 backgroundColor: Colors.red,

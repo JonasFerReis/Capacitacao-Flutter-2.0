@@ -40,7 +40,7 @@ class RemoveUser extends StatelessWidget {
 
                       // Botão de voltar
                       const SizedBox(height: 40),
-                      ComeBackButton(onTap: ComeBack),
+                      const ComeBackButton(),
 
                       // Imagem do computador
                       const SizedBox(height: 30),

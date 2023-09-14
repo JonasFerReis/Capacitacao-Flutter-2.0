@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
 
 class ComeBackButton extends StatelessWidget{
-  
-  final Function()? onTap;
 
   const ComeBackButton({
-    super.key,
-    required this.onTap,
+    super.key
     });
 
   @override
   Widget build(BuildContext context){
     return GestureDetector(
-      onTap: onTap,
+      onTap: (){
+        Navigator.pop(context);
+      },
       child: Container(
         padding: const EdgeInsets.all(20),
         margin: const EdgeInsets.symmetric(horizontal: 110),
