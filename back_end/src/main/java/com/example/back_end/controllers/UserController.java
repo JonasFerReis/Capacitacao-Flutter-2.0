@@ -68,6 +68,8 @@ public class UserController {
 
         return ResponseEntity.status(HttpStatus.OK).body(usuario);
     }
+
+    
     
     public User atualizarUser(User antigoUser, User novoUser){
         if (novoUser.getName() != null){
