@@ -13,24 +13,38 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
-    @Column
+    @Column(nullable = false)
     private String name;
 
-    @Column(nullable=false, unique=true)
+    @Column(nullable = false, unique = true)
     private String email;
 
-    @Column(nullable=false)
+    @Column(nullable = false)
     private String password;
 
+    @Column(name = "reset_password_token")
     private String resetPasswordToken;
 
-    public long getId() {
+    // Construtor padrão vazio (necessário para JPA)
+    public User() {
+    }
+
+    // Construtor com campos obrigatórios
+    public User(String name, String email, String password) {
+        this.name = name;
+        this.email = email;
+        this.password = password;
+    }
+
+    // Getters e setters para todos os campos
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -57,12 +71,12 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    public String getResetPasswordToken() {
+        return resetPasswordToken;
+    }
+
     public void setResetPasswordToken(String resetPasswordToken) {
         this.resetPasswordToken = resetPasswordToken;
     }
-    public User(String errorMessage) {
-        this.name = errorMessage;
-    }
-    
 }
-
