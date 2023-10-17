@@ -29,14 +29,7 @@ public class UserController {
         this.userRepository = userRepository;
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public ResponseEntity<?> getUser(@PathVariable("id") Long id){
-        Optional<User> usuario = userRepository.findById(id);
-        if(usuario.isPresent()){
-            return ResponseEntity.status(HttpStatus.OK).body(usuario.get());
-        }
-        return ResponseEntity.badRequest().body("Usuário não encontrado");
-    }
+
 
     @PostMapping
     public ResponseEntity<?> cadastrarUsuario(@RequestBody User user){
