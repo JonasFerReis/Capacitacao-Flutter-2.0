@@ -19,6 +19,7 @@ class _UsersListState extends State<UsersList> {
   void getUsers() async {
     final response = await http.get(Uri.parse('http://10.0.2.2:8080/users'));
     final data = jsonDecode(response.body);
+    usList.clear(); // Limpa a lista para não duplicar os usuários
     for (var i = 0; i < data.length; i++) {
       usList.add(UserCard(
         id: data[i]['id'],
@@ -26,9 +27,13 @@ class _UsersListState extends State<UsersList> {
         userEmail: data[i]['email'],
         userImage:
         'https://w7.pngwing.com/pngs/851/512/png-transparent-looking-at-the-cat-hand-painted-pet-cat.png',
+        onDelete: (id) {
+          setState(() {
+            usList.removeWhere((UserCard) => UserCard.id == id);
+          });
+        }
       ));
     }
-
     setState(() {});
   }
 

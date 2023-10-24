@@ -8,13 +8,15 @@ class UserCard extends StatelessWidget {
   final String userName;
   final String userEmail;
   final String userImage;
+  final Function(int) onDelete; // Função de callback
 
   const UserCard(
       {super.key,
       required this.id,
       required this.userName,
       required this.userEmail,
-      required this.userImage});
+      required this.userImage,
+      required this.onDelete});
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +41,10 @@ class UserCard extends StatelessWidget {
 
                   //deletar usuario
                   final response = await http.delete(Uri.parse('http://10.0.2.2:8080/users/$id'));
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => const RemoveUser()));
+                  if(response.statusCode == 200){
+                    onDelete(id);
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => const RemoveUser()));
+                  }
                 }),
                 icon: Icons.delete,
                 backgroundColor: Colors.red,
