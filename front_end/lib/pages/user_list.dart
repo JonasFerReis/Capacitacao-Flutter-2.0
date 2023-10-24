@@ -13,7 +13,6 @@ class UsersList extends StatefulWidget {
 class _UsersListState extends State<UsersList> {
   // Lista de usuários
   List<UserCard> usList = [];
-  bool precisaAtualizar = false;
 
   // Função que pega os dados do banco de dados e adiciona na lista
   void getUsers() async {
