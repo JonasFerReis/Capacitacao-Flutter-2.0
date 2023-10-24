@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:front_end/components/my_textfield.dart';
+import 'package:front_end/pages/user_list.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 import '../components/register_button.dart';
 
@@ -67,7 +70,26 @@ class RegisterPage extends StatelessWidget {
                 const SizedBox(height: 15),
 
                 //Botão "Entrar"
-                 RegisterButton(userName: nameController, userEmail: emailController, userImage: 'https://w7.pngwing.com/pngs/851/512/png-transparent-looking-at-the-cat-hand-painted-pet-cat.png'),
+                 RegisterButton(
+                  onPressed: () {
+
+                    //cadastra usuario no banco
+                    http.post(
+                      Uri.parse('http://10.0.2.2:8080/users'),
+                      headers: <String, String>{
+                        'Content-Type': 'application/json; charset=UTF-8',
+                      },
+                      body: jsonEncode({
+                        "name": nameController.text,
+                        "email": emailController.text,
+                        "password": passwordController.text,
+                      }),
+                    );
+
+                    //redireciona para a tela de listagem de usuarios
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => const UsersList()));
+                  },
+                 ),
 
                 Image.asset(
                   'lib/images/pc_com_chip_1.png',

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:front_end/components/user_card.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class UserInherited extends InheritedWidget {
   UserInherited({
@@ -22,6 +24,20 @@ class UserInherited extends InheritedWidget {
 
   void newUser(String userName, String userEmail, userImage){
     usList.add(UserCard(userName: userName, userEmail: userEmail, userImage: userImage));
+  }
+
+  //funcao que pega os dados do banco de dados e adiciona na lista
+  void getUsers() async {
+    final response = await http.get(Uri.parse('http://10.0.2.2:8080/users'));
+    final data = jsonDecode(response.body);
+    for (var i = 0; i < data.length; i++) {
+      print (data[i]['name']);
+      print (data[i]['email']);
+      usList.add(UserCard(
+          userName: data[i]['name'],
+          userEmail: data[i]['email'],
+          userImage: data[i]['https://w7.pngwing.com/pngs/851/512/png-transparent-looking-at-the-cat-hand-painted-pet-cat.png']));
+    }
   }
 
   static UserInherited of(BuildContext context) {

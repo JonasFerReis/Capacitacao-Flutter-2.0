@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:front_end/components/login_button.dart';
 import 'package:front_end/components/logo_icon.dart';
 import 'package:front_end/components/my_textfield.dart';
+import 'package:front_end/pages/user_list.dart';
 
 class LoginPage extends StatefulWidget {
   //construtor personalizado
@@ -19,7 +20,7 @@ class _LoginPageState extends State<LoginPage> {
 
   //método de login (integração back)
   void SignIn(){
-
+    Navigator.push(context, MaterialPageRoute(builder: (context) =>  const UsersList()));
   }
 
   bool RememberMe = false;
