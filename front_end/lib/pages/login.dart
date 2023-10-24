@@ -29,7 +29,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context){
     //rever o pq do const no Scalffold dps
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 102, 52, 116),
+      backgroundColor: const Color.fromARGB(255, 102, 52, 116),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Center(
