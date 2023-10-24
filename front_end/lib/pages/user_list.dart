@@ -13,6 +13,7 @@ class UsersList extends StatefulWidget {
 class _UsersListState extends State<UsersList> {
   // Lista de usuários
   List<UserCard> usList = [];
+  bool precisaAtualizar = false;
 
   // Função que pega os dados do banco de dados e adiciona na lista
   void getUsers() async {
@@ -20,6 +21,7 @@ class _UsersListState extends State<UsersList> {
     final data = jsonDecode(response.body);
     for (var i = 0; i < data.length; i++) {
       usList.add(UserCard(
+        id: data[i]['id'],
         userName: data[i]['name'],
         userEmail: data[i]['email'],
         userImage:

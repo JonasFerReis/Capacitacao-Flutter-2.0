@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:front_end/pages/remove_user.dart';
+import 'package:http/http.dart' as http;
 
 class UserCard extends StatelessWidget {
+  final id;
   final String userName;
   final String userEmail;
   final String userImage;
 
   const UserCard(
       {super.key,
+      required this.id,
       required this.userName,
       required this.userEmail,
       required this.userImage});
@@ -32,7 +35,10 @@ class UserCard extends StatelessWidget {
                 backgroundColor: const Color.fromARGB(255, 242, 124, 58),
               ),
               SlidableAction(
-                onPressed: ((context) {
+                onPressed: ((context) async {
+
+                  //deletar usuario
+                  final response = await http.delete(Uri.parse('http://10.0.2.2:8080/users/$id'));
                   Navigator.push(context, MaterialPageRoute(builder: (context) => const RemoveUser()));
                 }),
                 icon: Icons.delete,
