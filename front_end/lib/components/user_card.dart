@@ -1,18 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:front_end/pages/remove_user.dart';
+import 'package:front_end/pages/update_page.dart';
+import 'package:http/http.dart' as http;
 
-class UserCard extends StatelessWidget {
-  final String userName;
-  final String userEmail;
-  final String userImage;
+class UserCard extends StatefulWidget {
+  final id;
+  String userName;
+  String userEmail;
+  String userImage;
+  final Function(int) onDelete; // Função de callback
 
-  const UserCard(
+   UserCard(
       {super.key,
+      required this.id,
       required this.userName,
       required this.userEmail,
-      required this.userImage});
+      required this.userImage,
+      required this.onDelete});
 
+  @override
+  State<UserCard> createState() => _UserCardState();
+}
+
+class _UserCardState extends State<UserCard> {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -25,15 +36,36 @@ class UserCard extends StatelessWidget {
             motion: const StretchMotion(),
             children: [
               SlidableAction(
-                onPressed: ((context) {
+                onPressed: ((context) async {
                   //editar
+                  var response = {
+                    'id': widget.id,
+                    'name': widget.userName,
+                    'email': widget.userEmail,
+                    'image': widget.userImage
+                  };
+                  //dicionario que recebe o retorno da pagina de edicao de usuario
+                  var dicionario = await Navigator.push(context, MaterialPageRoute(builder: (context) => UpdatePage(id: widget.id)));
+                  if(dicionario != null){
+                    setState(() {
+                      widget.userName = dicionario['name'];
+                      widget.userEmail = dicionario['email'];
+                      widget.userImage = 'https://w7.pngwing.com/pngs/851/512/png-transparent-looking-at-the-cat-hand-painted-pet-cat.png';
+                    });
+                  }
                 }),
                 icon: Icons.edit,
                 backgroundColor: const Color.fromARGB(255, 242, 124, 58),
               ),
               SlidableAction(
-                onPressed: ((context) {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => const RemoveUser()));
+                onPressed: ((context) async {
+
+                  //deletar usuario
+                  final response = await http.delete(Uri.parse('http://10.0.2.2:8080/users/${widget.id}'));
+                  if(response.statusCode == 200){
+                    widget.onDelete(widget.id);
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => const RemoveUser()));
+                  }
                 }),
                 icon: Icons.delete,
                 backgroundColor: Colors.red,
@@ -68,7 +100,7 @@ class UserCard extends StatelessWidget {
                     ),
                     child: ClipOval(
                       child: Image.network(
-                        userImage,
+                        widget.userImage,
                         fit: BoxFit.cover,
                       ),
                     ),
@@ -80,14 +112,14 @@ class UserCard extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      userName,
+                      widget.userName,
                       style: const TextStyle(
                           fontSize: 18.0,
                           color: Color.fromARGB(255, 242, 124, 58)),
                     ),
                     const SizedBox(height: 10),
                     Text(
-                      userEmail,
+                      widget.userEmail,
                       style: const TextStyle(
                           fontSize: 18.0,
                           color: Color.fromARGB(255, 242, 124, 58)),

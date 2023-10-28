@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:front_end/components/my_textfield.dart';
-import 'package:front_end/pages/user_list.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 import '../components/register_button.dart';
 
-class RegisterPage extends StatelessWidget {
-  const RegisterPage({super.key});
+class UpdatePage extends StatelessWidget {
+  final id;
+  const UpdatePage({super.key, required this.id});
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +36,7 @@ class RegisterPage extends StatelessWidget {
                 //Email TextField
                 MyTextField(
                   controller: emailController,
-                  hintText: 'Email',
+                  hintText: 'Novo Email',
                   obscureText: false,
                 ),
 
@@ -45,7 +45,7 @@ class RegisterPage extends StatelessWidget {
                 //Username TextField
                 MyTextField(
                   controller: nameController,
-                  hintText: 'Nome',
+                  hintText: 'Novo Nome',
                   obscureText: false,
                 ),
 
@@ -54,7 +54,7 @@ class RegisterPage extends StatelessWidget {
                 //Password TextField
                 MyTextField(
                   controller: passwordController,
-                  hintText: 'Senha',
+                  hintText: 'Nova Senha',
                   obscureText: true,
                 ),
 
@@ -63,19 +63,19 @@ class RegisterPage extends StatelessWidget {
                 //Confirm Password TextField
                 MyTextField(
                   controller: confirmPasswordController,
-                  hintText: 'Senha',
+                  hintText: 'Confirmar Nova Senha',
                   obscureText: true,
                 ),
 
                 const SizedBox(height: 15),
 
-                //Botão "Entrar"
-                 RegisterButton(
+                //Botão "Editar"
+                RegisterButton(
                   onPressed: () {
 
-                    //cadastra usuario no banco
-                    http.post(
-                      Uri.parse('http://10.0.2.2:8080/users'),
+                    //edita usuario no banco
+                    http.put(
+                      Uri.parse('http://10.0.2.2:8080/users/$id'),
                       headers: <String, String>{
                         'Content-Type': 'application/json; charset=UTF-8',
                       },
@@ -85,11 +85,15 @@ class RegisterPage extends StatelessWidget {
                         "password": passwordController.text,
                       }),
                     );
-
-                    //redireciona para a tela de listagem de usuarios
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => const UsersList()));
+                    var dicionario = {
+                      'id': id,
+                      'name': nameController.text,
+                      'email': emailController.text,
+                      'password': passwordController.text,
+                    };
+                    Navigator.pop(context, dicionario);
                   },
-                 ),
+                ),
 
                 Image.asset(
                   'lib/images/pc_com_chip_1.png',

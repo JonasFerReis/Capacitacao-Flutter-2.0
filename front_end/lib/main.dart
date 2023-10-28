@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:front_end/data/user_inherited.dart';
 import 'package:front_end/pages/initial_screen.dart';
 
 void main(){
@@ -11,12 +10,10 @@ class MyApp extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
-    return  UserInherited(
-      child: const MaterialApp(
+    return const MaterialApp(
         debugShowCheckedModeBanner: false,
         home: InitialScreen(),
-      ),
-    );
+      );
   }
 }
 
