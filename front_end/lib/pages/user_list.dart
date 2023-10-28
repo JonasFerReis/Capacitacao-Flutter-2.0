@@ -30,7 +30,7 @@ class _UsersListState extends State<UsersList> {
           setState(() {
             usList.removeWhere((UserCard) => UserCard.id == id);
           });
-        }
+        },
       ));
     }
     setState(() {});
